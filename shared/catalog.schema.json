@@ -1,0 +1,489 @@
+{
+  "componentNames": [
+    "Stack",
+    "Heading",
+    "Text",
+    "Card",
+    "Stat",
+    "DayCard",
+    "Table",
+    "BarChart",
+    "BulletList",
+    "TextInput",
+    "NumberInput",
+    "Select",
+    "Button"
+  ],
+  "actionNames": [
+    "submitPreferences",
+    "replan"
+  ],
+  "spec": {
+    "type": "object",
+    "properties": {
+      "root": {
+        "type": "string"
+      },
+      "elements": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "Stack",
+                "Heading",
+                "Text",
+                "Card",
+                "Stat",
+                "DayCard",
+                "Table",
+                "BarChart",
+                "BulletList",
+                "TextInput",
+                "NumberInput",
+                "Select",
+                "Button"
+              ]
+            },
+            "props": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "slots": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "visible": {},
+            "repeat": {}
+          },
+          "required": [
+            "type",
+            "props",
+            "children"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "root",
+      "elements"
+    ],
+    "additionalProperties": false
+  },
+  "components": {
+    "Stack": {
+      "description": "Layout container that stacks children vertically or horizontally.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "direction": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "vertical",
+                  "horizontal"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "gap": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "sm",
+                  "md",
+                  "lg"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "direction",
+          "gap"
+        ]
+      }
+    },
+    "Heading": {
+      "description": "A section heading.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "level": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "text",
+          "level"
+        ]
+      }
+    },
+    "Text": {
+      "description": "A paragraph of text.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "tone": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "muted"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "text",
+          "tone"
+        ]
+      }
+    },
+    "Card": {
+      "description": "A bordered card that groups children under a title.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "subtitle"
+        ]
+      }
+    },
+    "Stat": {
+      "description": "A KPI tile: a short label over a big value.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "value"
+        ]
+      }
+    },
+    "DayCard": {
+      "description": "One day of an itinerary with timed activities and costs.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "title": {
+            "type": "string"
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "time": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string",
+                  "enum": [
+                    "food",
+                    "sight",
+                    "activity",
+                    "transport",
+                    "stay"
+                  ]
+                },
+                "cost": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "time",
+                "name",
+                "category",
+                "cost"
+              ]
+            }
+          }
+        },
+        "required": [
+          "day",
+          "title",
+          "activities"
+        ]
+      }
+    },
+    "Table": {
+      "description": "A simple data table.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "columns",
+          "rows"
+        ]
+      }
+    },
+    "BarChart": {
+      "description": "Horizontal bar chart for comparing a few values.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "label",
+                "value"
+              ]
+            }
+          }
+        },
+        "required": [
+          "title",
+          "unit",
+          "data"
+        ]
+      }
+    },
+    "BulletList": {
+      "description": "A titled bullet list (tips, packing list...).",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "items"
+        ]
+      }
+    },
+    "TextInput": {
+      "description": "Text field. Bind value with { $bindState: '/path' }.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {},
+          "placeholder": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "label",
+          "value",
+          "placeholder"
+        ]
+      }
+    },
+    "NumberInput": {
+      "description": "Number field. Bind value with { $bindState: '/path' }.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {},
+          "min": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "max": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "label",
+          "value",
+          "min",
+          "max"
+        ]
+      }
+    },
+    "Select": {
+      "description": "Dropdown. Bind value with { $bindState: '/path' }.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {},
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "label",
+          "value",
+          "options"
+        ]
+      }
+    },
+    "Button": {
+      "description": "Button. Emits 'press'; wire it with on.press -> action.",
+      "props": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "variant": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "primary",
+                  "secondary"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "label",
+          "variant"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "root": "prefs-form",
+  "elements": {
+    "destination": {
+      "type": "TextInput",
+      "props": {
+        "label": "Destination",
+        "value": {
+          "$bindState": "/prefs/destination"
+        },
+        "placeholder": "e.g. Lisbon"
+      },
+      "children": []
+    },
+    "days": {
+      "type": "NumberInput",
+      "props": {
+        "label": "Days",
+        "value": {
+          "$bindState": "/prefs/days"
+        },
+        "min": 1,
+        "max": 14
+      },
+      "children": []
+    },
+    "budget": {
+      "type": "NumberInput",
+      "props": {
+        "label": "Total budget (EUR)",
+        "value": {
+          "$bindState": "/prefs/budget"
+        },
+        "min": 50,
+        "max": 100000
+      },
+      "children": []
+    },
+    "style": {
+      "type": "Select",
+      "props": {
+        "label": "Travel style",
+        "value": {
+          "$bindState": "/prefs/style"
+        },
+        "options": [
+          "budget",
+          "balanced",
+          "luxury"
+        ]
+      },
+      "children": []
+    },
+    "interests": {
+      "type": "TextInput",
+      "props": {
+        "label": "Interests",
+        "value": {
+          "$bindState": "/prefs/interests"
+        },
+        "placeholder": "food, history, nightlife..."
+      },
+      "children": []
+    },
+    "submit": {
+      "type": "Button",
+      "props": {
+        "label": "Plan my trip",
+        "variant": "primary"
+      },
+      "children": [],
+      "on": {
+        "press": {
+          "action": "submitPreferences"
+        }
+      }
+    },
+    "text-7": {
+      "type": "Text",
+      "props": {
+        "text": "A few details and I'll build your itinerary.",
+        "tone": "muted"
+      },
+      "children": []
+    },
+    "prefs-form": {
+      "type": "Card",
+      "props": {
+        "title": "Trip to Porto",
+        "subtitle": "Your preferences"
+      },
+      "children": [
+        "text-7",
+        "destination",
+        "days",
+        "budget",
+        "style",
+        "interests",
+        "submit"
+      ]
+    }
+  },
+  "state": {
+    "prefs": {
+      "destination": "Porto",
+      "days": 2,
+      "budget": 1000,
+      "style": "balanced",
+      "interests": ""
+    }
+  }
+}
